@@ -22,8 +22,8 @@ Both parts use the same preprocessing and the same optimised Random Forest. The 
 | **Test data** | The other 20% of `train.csv` (292 houses), because `test.csv` has no prices | `test.csv` (1,459 houses), scored by Kaggle |
 | **Evaluation** | MAE, MSE, RMSE and R² in dollars, calculated locally | RMSE on log prices, calculated by Kaggle |
 | **Extra preprocessing** | - | Fills 15 columns that only have missing values in `test.csv` (e.g. `KitchenQual`, `GarageCars`, `MSZoning`) |
-| **Output** | Report, figures and evaluation results | `submission.csv` uploaded to Kaggle |
-| **Script** | `Source code.py` | `kaggle_submission.py` |
+| **Output** | Report, figures and evaluation results | `submission/submission.csv` uploaded to Kaggle |
+| **Script** | `src/assignment.py` | `src/kaggle_submission.py` |
 
 ---
 
@@ -75,16 +75,21 @@ Both parts use the same preprocessing and the same optimised Random Forest. The 
 ## Repository structure
 
 ```
-├── Source code.py              # Assignment: EDA, preprocessing, training, evaluation, optimisation
-├── kaggle_submission.py        # Kaggle: trains on full train.csv and predicts test.csv
-├── submission.csv              # Predictions submitted to Kaggle
-├── MAI5043_22025530_Assignment1_Report.docx   # Assignment report
-├── figures/                    # All plots saved by Source code.py
-├── train.csv                   # Kaggle training data (with SalePrice)
-├── test.csv                    # Kaggle test data (without SalePrice)
-├── sample_submission.csv       # Kaggle submission format
-├── data_description.txt        # Description of all 79 features
-└── requirements.txt
+├── data/
+│   ├── train.csv                 # Kaggle training data (with SalePrice)
+│   ├── test.csv                  # Kaggle test data (without SalePrice)
+│   ├── sample_submission.csv     # Kaggle submission format
+│   └── data_description.txt      # Description of all 79 features
+├── src/
+│   ├── assignment.py             # Assignment: EDA, preprocessing, training, evaluation, optimisation
+│   └── kaggle_submission.py      # Kaggle: trains on full train.csv and predicts test.csv
+├── figures/                      # All plots saved by assignment.py
+├── report/
+│   └── MAI5043_22025530_Assignment1_Report.docx   # Assignment report
+├── submission/
+│   └── submission.csv            # Predictions submitted to Kaggle
+├── requirements.txt
+└── README.md
 ```
 
 ---
@@ -95,13 +100,13 @@ Both parts use the same preprocessing and the same optimised Random Forest. The 
 pip install -r requirements.txt
 
 # Assignment (saves all plots to figures/)
-python "Source code.py"
+python src/assignment.py
 
-# Kaggle submission (creates submission.csv)
-python kaggle_submission.py
+# Kaggle submission (creates submission/submission.csv)
+python src/kaggle_submission.py
 ```
 
-Run both scripts from the repository folder so they can find `train.csv` and `test.csv`. The randomised search in `Source code.py` takes several minutes.
+Run both scripts from the repository root so they can find the `data/` folder. The randomised search in `assignment.py` takes several minutes.
 
 ---
 

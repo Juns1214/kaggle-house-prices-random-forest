@@ -4,6 +4,7 @@ Kaggle submission - House Prices: Advanced Regression Techniques
 Uses the same preprocessing and the optimised Random Forest from the assignment,
 trained on the full train.csv, then predicts SalePrice for test.csv.
 """
+import os
 import warnings
 import numpy as np
 import pandas as pd
@@ -16,8 +17,8 @@ from sklearn.model_selection import KFold, cross_val_score
 warnings.filterwarnings('ignore')
 
 # Load data
-train_df = pd.read_csv('train.csv')
-test_df = pd.read_csv('test.csv')
+train_df = pd.read_csv('data/train.csv')
+test_df = pd.read_csv('data/test.csv')
 test_ids = test_df['Id']
 
 # Remove the two outliers (training data only - every test house needs a prediction)
@@ -209,10 +210,11 @@ final_model.fit(X_train_s, y_train_log)
 test_pred = np.expm1(final_model.predict(X_test_s))
 
 submission = pd.DataFrame({'Id': test_ids, 'SalePrice': test_pred})
-submission.to_csv('submission.csv', index=False)
+os.makedirs('submission', exist_ok=True)
+submission.to_csv('submission/submission.csv', index=False)
 
 # Final checks before uploading
-print('\nSubmission saved: submission.csv')
+print('\nSubmission saved: submission/submission.csv')
 print('Rows:', len(submission), '| Missing:', submission['SalePrice'].isnull().sum())
 print(submission['SalePrice'].describe().round(0))
 print(submission.head())

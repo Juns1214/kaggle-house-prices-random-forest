@@ -23,7 +23,7 @@ warnings.filterwarnings('ignore')
 Task 1 & 2: Load data and perform EDA
 '''
 #Load data
-train_df = pd.read_csv('train.csv')
+train_df = pd.read_csv('data/train.csv')
 pd.set_option("display.max_columns", None)  
 pd.set_option("display.max_rows", None)      
 
